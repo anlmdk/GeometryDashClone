@@ -10,7 +10,7 @@ public class ParallaxGround : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.gameStarted)
+        if (GameManager.instance.gameStarted)
         {
             ParallaxMovement();
         }

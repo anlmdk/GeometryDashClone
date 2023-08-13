@@ -6,12 +6,15 @@ public class PlayerJump : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    public Transform groundCheckTransform;
+    public float groundCheckRadius;
+    public LayerMask groundCheckLayerMask;
+
     public float jumpPower = 26f;
     public float rotationAngle = 180f; // Dönme açýsý
     public float rotationDuration = 0.3f; // Dönme süresi
     private Quaternion targetRotation; // Dönme açýsý
 
-    private bool isJumping = false;
     private bool isRotating = false;
 
     void Start()
@@ -25,31 +28,30 @@ public class PlayerJump : MonoBehaviour
     {
         ClickMouseButton();
     }
-
     void ClickMouseButton()
     {
-        if (Input.GetMouseButtonDown(0) && GameManager.gameStarted)
+        if(GameManager.instance.gameStarted)
         {
-            Jump();
+            if (Input.GetMouseButton(0) && rb.velocity.y <= 0f )
+            {
+                Jump();
+            }
         }
     }
     void Jump()
     {
-        if (isJumping && !isRotating)
+        if (OnGround() && !isRotating)
         {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
 
             StartCoroutine(RotateCharacter());
-
-            isJumping = false;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    bool OnGround()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isJumping = true;
-        }
+        return Physics2D.OverlapBox(groundCheckTransform.position, Vector2.right * 1.1f + Vector2.up * groundCheckRadius, groundCheckLayerMask);
     }
     private IEnumerator RotateCharacter()
     {
