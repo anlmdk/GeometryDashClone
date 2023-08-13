@@ -16,6 +16,7 @@ public class PlayerJump : MonoBehaviour
     private Quaternion targetRotation; // Dönme açýsý
 
     private bool isRotating = false;
+    private bool isJumping = false;
 
     void Start()
     {
@@ -32,9 +33,16 @@ public class PlayerJump : MonoBehaviour
     {
         if(GameManager.instance.gameStarted)
         {
-            if (Input.GetMouseButton(0) && rb.velocity.y <= 0f )
+            if (Input.GetMouseButton(0))
             {
-                Jump();
+                if (OnGround() && !isJumping)
+                {
+                    Jump();
+                }
+                else if (isJumping && rb.velocity.y <= 0)
+                {
+                    Jump();
+                }
             }
         }
     }
@@ -42,6 +50,8 @@ public class PlayerJump : MonoBehaviour
     {
         if (OnGround() && !isRotating)
         {
+            isJumping = true;
+
             rb.velocity = new Vector2(rb.velocity.x, 0f);
 
             rb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
@@ -71,5 +81,7 @@ public class PlayerJump : MonoBehaviour
 
         transform.rotation = finalRotation;
         isRotating = false;
+
+        isJumping = false; // Zýplama tamamlandýðýnda isJumping'i sýfýrla
     }
 }

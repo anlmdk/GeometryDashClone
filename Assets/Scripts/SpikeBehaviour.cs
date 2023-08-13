@@ -8,6 +8,18 @@ public class SpikeBehaviour : MonoBehaviour
 {
     public float speed = 5f;
 
+    public bool death = false;
+    public bool restart = false;
+
+    // Sahne yeniden yüklendiðinde çaðrýlacak olan metot
+    void Start()
+    {
+        if (!restart)
+        {
+            GameManager.instance.gameStarted = true;
+            GameManager.instance.menuPanel.SetActive(false);
+        }
+    }
     void Update()
     {
         if (GameManager.instance.gameStarted)
@@ -26,10 +38,12 @@ public class SpikeBehaviour : MonoBehaviour
     }
     void Death()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        GameManager.instance.menuPanel.SetActive(false);
+        if (!death)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            restart = true;
+        }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
