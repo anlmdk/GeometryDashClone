@@ -222,6 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  death: 0
+  restart: 1
 --- !u!61 &154711201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -367,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &238147101
 AudioSource:
   m_ObjectHideFlags: 0
@@ -571,6 +573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  death: 0
+  restart: 1
 --- !u!212 &300041237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2225,6 +2229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  death: 0
+  restart: 1
 --- !u!61 &1673038631
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2362,6 +2368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  death: 0
+  restart: 1
 --- !u!212 &1694026975
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2855,6 +2863,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  death: 0
+  restart: 1
 --- !u!212 &1886794880
 SpriteRenderer:
   m_ObjectHideFlags: 0
